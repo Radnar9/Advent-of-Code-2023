@@ -13,7 +13,7 @@ private fun part1(input: List<String>): Int {
 
 private val digitsLetters = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
 private data class CalibrationValue(val index: Int, val value: Int)
-fun part2(input: List<String>): Int {
+private fun part2(input: List<String>): Int {
     return input.sumOf { line ->
         var firstVal = CalibrationValue(Int.MAX_VALUE, 0)
         var lastVal = CalibrationValue(Int.MIN_VALUE, 0)
