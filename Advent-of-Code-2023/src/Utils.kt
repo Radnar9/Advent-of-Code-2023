@@ -16,3 +16,11 @@ fun readInputToString(name: String) = Path("src/$name.txt").readText()
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+fun Char.isSymbolNotDot(): Boolean {
+    return !this.isLetterOrDigit() && this != '.'
+}
+
+fun Char.isAsterisk(): Boolean {
+    return this == '*'
+}
