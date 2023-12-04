@@ -35,9 +35,10 @@ private fun part2(input: List<String>): Int {
 
     splitWinningNumbersFromMine(input).forEachIndexed { currentCardId, card ->
         val matches = getMatchesCount(card)
-        val currentInstances = (gameMap[currentCardId]?.instances ?: 0) + 1
+        val currentInstances = (gameMap[currentCardId]?.instances ?: 0) + 1 // Add instance of the original card
         gameMap[currentCardId] = Card(matches, currentInstances)
 
+        // Add instances of the cards copies
         (0..<matches).forEach { j ->
             val nextCardId = currentCardId + j + 1
             val nextCardInstances = gameMap[nextCardId]?.instances ?: 0
