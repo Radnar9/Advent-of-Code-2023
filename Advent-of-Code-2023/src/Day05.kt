@@ -9,7 +9,6 @@ private const val INPUT_FILE = AOC_DAY
 // destination range start | source range start | range length
 private data class Range(val destStart: Long, val sourceRange: LongRange)
 
-// find the lowest location number that corresponds to any of the initial seeds
 /**
  * After parsing the input and having a range for each of its lines, check if each seed is contained in the range line.
  * If so, calculate the corresponding destination value, and add it to the seed list, so it can be evaluated in the
