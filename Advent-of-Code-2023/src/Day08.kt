@@ -31,7 +31,7 @@ private const val STARTING_CHAR = 'A'
 private const val ENDING_CHAR = 'Z'
 
 /**
- * After finding that the numbers of steps until finding a position ending with 'Z' is always the same for each initial
+ * After finding that the numbers of steps until finding a position ending with 'Z' are always the same for each initial
  * position, I just need to find each cycle length and calculate the Least Common Multiple of all of them.
  */
 private fun part2(input: List<String>): Long {
