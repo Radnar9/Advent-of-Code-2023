@@ -64,3 +64,16 @@ fun lcm(numbers: List<Long>): Long {
     }
     return lcm
 }
+
+/**
+ * Given a list of lists, transpose the inner lists.
+ */
+fun List<List<String>>.innerTranspose(): List<List<String>> {
+    return this.map { patterns ->
+        patterns[0].indices.map { x ->
+            patterns.indices.joinToString("") { y ->
+                patterns[y][x].toString()
+            }
+        }
+    }
+}
