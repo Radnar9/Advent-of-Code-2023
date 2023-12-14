@@ -77,3 +77,14 @@ fun List<List<String>>.innerTranspose(): List<List<String>> {
         }
     }
 }
+
+/**
+ * Transpose a list.
+ */
+fun List<String>.transpose(): List<String> {
+    return this[0].indices.map { x ->
+        this.indices.joinToString("") { y ->
+            this[y][x].toString()
+        }
+    }
+}
