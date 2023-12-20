@@ -80,34 +80,25 @@ private fun part2(input: List<String>): Long {
         val rules = workflows[workflowName]!!
         var total = 0L
 
-        for (rule in rules) {
+        for (rule in rules.dropLast(1)) {
             val partRange = rating[rule.name]!!
-            val rangesPair = if (rule.signal == '<' && rule.comparingNum!! in partRange) {
-                Pair(partRange.first..<rule.comparingNum, rule.comparingNum..partRange.last)
+            val (trueRange, falseRange) = if (rule.signal == '<') {
+                Pair(partRange.first..<rule.comparingNum!!, rule.comparingNum..partRange.last)
             } else {
                 Pair(rule.comparingNum!! + 1..partRange.last, partRange.first..rule.comparingNum)
             }
 
-            if (rangesPair.first.first <= rangesPair.first.last) {
-                rating[rule.name!!] = rangesPair.first
-                total += countAccepted(rule.destiny, rating)
+            if (trueRange.first <= trueRange.last) {
+                val newRating = rating.toMutableMap()
+                newRating[rule.name!!] = trueRange
+                total += countAccepted(rule.destiny, newRating)
             }
 
-            if (rangesPair.second.first <= rangesPair.second.last) {
-                rating[rule.name!!] = rangesPair.second
+            if (falseRange.first <= falseRange.last) {
+                rating[rule.name!!] = falseRange
             } else {
                 break
             }
-
-            /*if (rule.name == null) return countAccepted(rule.destiny, rating)
-//            val partRange = rating[rule.name]!!
-            if (rule.signal == '<' && rule.comparingNum!! in partRange) {
-                rating[rule.name] = partRange.first..<rule.comparingNum
-                return countAccepted(rule.destiny, rating)
-            } else if (rule.signal == '>' && rule.comparingNum!! in partRange) {
-                rating[rule.name] = rule.comparingNum..partRange.last
-                return countAccepted(rule.destiny, rating)
-            }*/
         }
         total += countAccepted(rules.last().destiny, rating)
         return total
@@ -132,9 +123,9 @@ fun main() {
     println("* PART 2:   ${part2(testInput)}\t== $part2ExpectedRes\n")
 
 
-//    val input = readInputToList(INPUT_FILE)
-//    val improving = false
-//    println("---| FINAL INPUT |---")
-//    println("* PART 1: ${part1(input)}${if (improving) "\t== ???" else ""}")
-//    println("* PART 2: ${part2(input)}${if (improving) "\t== ???" else ""}")
+    val input = readInputToList(INPUT_FILE)
+    val improving = true
+    println("---| FINAL INPUT |---")
+    println("* PART 1: ${part1(input)}${if (improving) "\t== 377025" else ""}")
+    println("* PART 2: ${part2(input)}${if (improving) "\t== 135506683246673" else ""}")
 }
